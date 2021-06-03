@@ -26,7 +26,7 @@ class ReportSeeder extends Seeder
             $customer=Customer::create([
                 'full_name'     =>$faker->name(),
                 'country'       =>$faker->randomElement($country),
-                'age'           =>$faker->numberBetween(15,60),
+                'age'           =>$faker->numberBetween(1,60),
                 'gender'        =>$faker->randomElement($gender),
                 'device'        =>$faker->randomElement($device)
 

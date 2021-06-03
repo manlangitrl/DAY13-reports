@@ -3,7 +3,13 @@
 use Illuminate\Support\Facades\Route;
 
 
-    Route::get('/reporting', [
+    Route::get('/customers', [
         App\Http\Controllers\ReportingController::class,
         'index'
         ]);
+
+
+        Route::get('/orders', [
+            App\Http\Controllers\ReportingController::class,
+            'orders'
+            ]);
