@@ -57,13 +57,13 @@ class ReportingController extends Controller
             {
 
                 $data= [
-                    'total_earned'=>Order::sum('total'),
+                    'total_earned'=>Order::where('status','!=','canceled')->sum('total'),
                     'avg_order_total'=>Order::avg('total'),
 
                     'category'=>[
                         'Toys'=>Order::whereCategory('Toys')->count(),
                         'Books'=>Order::whereCategory('Books')->count(),
-                        'Home Supplies'=>Order::whereCategory('Home Supplies')->count(),
+                        'Home_Supplies'=>Order::whereCategory('Home Supplies')->count(),
                         'Accessories'=>Order::whereCategory('Accessories')->count(),
                         'Gadgets'=>Order::whereCategory('Gadgets')->count(),
                         'Food'=>Order::whereCategory('Food')->count(),
@@ -84,42 +84,50 @@ class ReportingController extends Controller
 
                     'year'=>[
                         '10'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01')->subYears(10),
-                                                                Carbon::parse('2021-12-31')->subYears(10)])->count(),
+                                                                Carbon::parse('2021-12-31')->subYears(10)])->where('status','!=','canceled')->sum('total'),
 
                         '9'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01')->subYears(9),
-                                                                Carbon::parse('2021-12-31')->subYears(9)])->count(),
+                                                                Carbon::parse('2021-12-31')->subYears(9)])->where('status','!=','canceled')->sum('total'),
 
                         '8'=>Order::whereBetween('order_date',        [Carbon::parse('2021-01-01')->subYears(8),
-                                                                 Carbon::parse('2021-12-31')->subYears(8),])->count(),
+                                                                 Carbon::parse('2021-12-31')->subYears(8),])->where('status','!=','canceled')->sum('total'),
 
                         '7'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01')->subYears(7),
-                                                         Carbon::parse('2021-12-31')->subYears(7)])->count(),
+                                                         Carbon::parse('2021-12-31')->subYears(7)])->where('status','!=','canceled')->sum('total'),
 
                         '6'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01')->subYears(6),
-                                                        Carbon::parse('2021-12-31')->subYears(6)])->count(),
+                                                        Carbon::parse('2021-12-31')->subYears(6)])->where('status','!=','canceled')->sum('total'),
 
                         '5'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01')->subYears(5),
-                                                                Carbon::parse('2021-12-31')->subYears(5)])->count(),
+                                                                Carbon::parse('2021-12-31')->subYears(5)])->where('status','!=','canceled')->sum('total'),
                                                                 
                         '4'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01')->subYears(4),
-                                                                Carbon::parse('2021-12-31')->subYears(4)])->count(),
+                                                                Carbon::parse('2021-12-31')->subYears(4)])->where('status','!=','canceled')->sum('total'),
 
                         '3'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01')->subYears(3),
-                                                         Carbon::parse('2021-12-31')->subYears(3)])->count(),
+                                                         Carbon::parse('2021-12-31')->subYears(3)])->where('status','!=','canceled')->sum('total'),
 
                         '2'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01')->subYears(2),
-                                                        Carbon::parse('2021-12-31')->subYears(2)])->count(),
+                                                        Carbon::parse('2021-12-31')->subYears(2)])->where('status','!=','canceled')->sum('total'),
 
                         '1'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01')->subYears(1),
-                                                 Carbon::parse('2021-12-31')->subYears(1)])->count(),
+                                                 Carbon::parse('2021-12-31')->subYears(1)])->where('status','!=','canceled')->sum('total'),
                                                                                                 
                         '0'=>Order::whereBetween('order_date', [Carbon::parse('2021-01-01'),
-                        Carbon::parse('2021-12-31')])->count(),
+                        Carbon::parse('2021-12-31')])->where('status','!=','canceled')->sum('total'),
                     ]
 
                
                 ];  
 
-                    dd($data);
+                    // dd($data);
+
+                    return view('order')->with(
+                        ['data'=>$data
+            
+                        
+                     ]
+                    );
          }
+         
 }
